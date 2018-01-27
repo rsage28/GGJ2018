@@ -6,5 +6,6 @@
     Graffiti,
     KidnapCeleb,
     Threaten,
-    Soapbox
+    Soapbox,
+    MurderScandal
 }
