@@ -13,7 +13,7 @@ public class Station : MonoBehaviour {
     private UpgradeType upgrade;
 
     public Town ContainingTown {
-        get { return containingTown; } 
+        get { return containingTown; }
         set { containingTown = value; }
     }
 
@@ -28,7 +28,7 @@ public class Station : MonoBehaviour {
     }
 
     public float AdvertisingRevenuePercent {
-        get { return advertisingRevenuePercent; } 
+        get { return advertisingRevenuePercent; }
         set { advertisingRevenuePercent = value; }
     }
 
@@ -43,12 +43,16 @@ public class Station : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Start() {
+        GameManager.TimeTick.AddListener(OnTimeTick);
+    }
+
+    // Update is called once per frame
+    void Update() {
+
+    }
+
+    void OnTimeTick() {
+        print("some shit here");
+    }
 }
