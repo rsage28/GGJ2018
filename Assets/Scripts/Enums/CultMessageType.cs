@@ -3,7 +3,7 @@
     Hateful,
     Murderous,
     Recruit,
-    Apocolyptic,
+    Apocalyptic,
     Money,
     Conspiracy,
     Revelatory
