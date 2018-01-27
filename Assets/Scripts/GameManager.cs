@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     private float timeScale;
@@ -14,6 +15,11 @@ public class GameManager : MonoBehaviour {
     private float suspicionLevel;
     [SerializeField]
     private float timeStep = 60;
+
+    public Text listenerCountText;
+    public Text moneyCountText;
+    public Text cultistCountText;
+    public Text suspicionLevelText;
 
     public static UnityEvent TimeTick;
 
@@ -55,6 +61,7 @@ public class GameManager : MonoBehaviour {
         MoneyCount = 20000f;
         EventChance = 15f;
         SuspicionLevel = 0f;
+        UpdateText();
     }
 
     void Awake() {
@@ -65,16 +72,26 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        ListenerCount += 10f;
+        UpdateText();
         if (Time.time >= nextTimeStep) {
             nextTimeStep = Time.time + TimeStep;
             TimeTick.Invoke();
             if (Random.Range(0, 100) <= EventChance) {
                 RandomEvent();
             }
+            UpdateText();
         }        
     }
 
     void RandomEvent() {
         print("a random event happened");
+    }
+
+    void UpdateText() {
+        listenerCountText.text = "Listeners: " + ListenerCount;
+        moneyCountText.text = "Money: $" + MoneyCount;
+        cultistCountText.text = "Cult Followers: " + CultistCount;
+        suspicionLevelText.text = "Suspicion Level: " + SuspicionLevel;
     }
 }
