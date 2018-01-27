@@ -7,4 +7,6 @@
     AlternativeRock,
     NewWave,
     Metal,
+    Blues,
+    Country
 }
