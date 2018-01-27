@@ -5,11 +5,15 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour {
     private float timeScale;
-    private float timeStep;
+    private float nextTimeStep;
 
+    private float eventChance;
     private float listenerCount;
     private float cultistCount;
     private float moneyCount;
+    private float suspicionLevel;
+    [SerializeField]
+    private float timeStep = 60;
 
     public static UnityEvent TimeTick;
 
@@ -28,12 +32,29 @@ public class GameManager : MonoBehaviour {
         set { moneyCount = value; }
     }
 
+    public float EventChance {
+        get { return eventChance; }
+        set { eventChance = value; }
+    }
+
+    public float SuspicionLevel {
+        get { return suspicionLevel; }
+        set { suspicionLevel = value; }
+    }
+
+    public float TimeStep {
+        get { return timeStep; }
+        set { timeStep = value; }
+    }
+
     // Use this for initialization
     void Start() {
-        timeScale = 0;
+        nextTimeStep = Time.time + TimeStep;
         ListenerCount = 0f;
         CultistCount = 0f;
         MoneyCount = 20000f;
+        EventChance = 15f;
+        SuspicionLevel = 0f;
     }
 
     void Awake() {
@@ -44,6 +65,16 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        
+        if (Time.time >= nextTimeStep) {
+            nextTimeStep = Time.time + TimeStep;
+            TimeTick.Invoke();
+            if (Random.Range(0, 100) <= EventChance) {
+                RandomEvent();
+            }
+        }        
+    }
+
+    void RandomEvent() {
+        print("a random event happened");
     }
 }
