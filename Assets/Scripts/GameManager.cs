@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour {
     private float timeScale;
@@ -9,6 +10,8 @@ public class GameManager : MonoBehaviour {
     private float listenerCount;
     private float cultistCount;
     private float moneyCount;
+
+    public static UnityEvent TimeTick;
 
     public float ListenerCount {
         get { return listenerCount; }
@@ -26,12 +29,21 @@ public class GameManager : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Start() {
+        timeScale = 0;
+        ListenerCount = 0f;
+        CultistCount = 0f;
+        MoneyCount = 20000f;
+    }
+
+    void Awake() {
+        if (TimeTick == null) {
+            TimeTick = new UnityEvent();
+        }
+    }
+
+    // Update is called once per frame
+    void Update() {
+        
+    }
 }
