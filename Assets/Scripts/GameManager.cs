@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     public static UnityEvent TimeTick;
 
     private static GameManager instance;
-    
+
     [SerializeField]
     private GameCamera gameCamera;
     [SerializeField]
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
     private float suspicionLevel = 0;
     [SerializeField]
     private float timeStep = 60;
-    
+
     public Text listenerCountText;
     public Text moneyCountText;
     public Text cultistCountText;
@@ -97,13 +97,8 @@ public class GameManager : MonoBehaviour {
 
     void Start() {
         nextTimeStep = Time.time + TimeStep;
-        ListenerCount = 0f;
-        CultistCount = 0f;
-        MoneyCount = 20000f;
-        EventChance = 15f;
-        SuspicionLevel = 0f;
-        UpdateText();
         Towns = FindObjectsOfType<Town>().ToList();
+        UpdateText();
     }
 
     void Awake() {
