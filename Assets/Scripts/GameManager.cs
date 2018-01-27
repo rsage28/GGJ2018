@@ -33,13 +33,25 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private float timeStep = 60;
 
+    // HUD text
     public Text listenerCountText;
     public Text moneyCountText;
     public Text cultistCountText;
     public Text suspicionLevelText;
 
+    // Town info text
+    public Text populationCountText;
+    public Text listenerCountTextTown;
+    public Text cultistCountTextTown;
+    public Text convertabilityLevelText;
+    public Text preferredMusicTypeText;
+    public Text preferredAdTypeText;
+    public Text preferredCultTypeText;
+    public Text stationCostText;
+
     public Canvas HUD;
     public Canvas stationManager;
+    public Canvas townInfo;
 
     public static GameManager Instance {
         get { return instance; }
@@ -121,7 +133,7 @@ public class GameManager : MonoBehaviour {
                 RandomEvent();
             }
             UpdateText();
-        }        
+        }
     }
 
     private void RandomEvent() {
@@ -137,5 +149,20 @@ public class GameManager : MonoBehaviour {
 
     public Town getNearestTown(Vector3 pos) {
         return Towns.OrderBy(t => (t.transform.position - pos).sqrMagnitude).FirstOrDefault();
+    }
+
+    public void SelectTown(Town town) {
+        SelectedTown = town;
+        townInfo.enabled = town != null ? true : false;
+        if (townInfo.enabled) {
+            populationCountText.text = "";
+            listenerCountTextTown.text = "";
+            cultistCountTextTown.text = "";
+            convertabilityLevelText.text = "";
+            preferredMusicTypeText.text = "";
+            preferredAdTypeText.text = "";
+            preferredCultTypeText.text = "";
+            stationCostText.text = "";
+        }
     }
 }
