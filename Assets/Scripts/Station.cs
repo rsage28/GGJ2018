@@ -9,8 +9,8 @@ public class Station : MonoBehaviour {
     private float advertisingRevenuePercent;
     private List<Employee> employees;
     private float moneyVsHappiness;
-    private MarketingPlan marketingPlan;
-    private UpgradeTypes upgrade;
+    private MarketingPlanType marketingPlan;
+    private UpgradeType upgrade;
 
     public Town ContainingTown {
         get { return containingTown; }
