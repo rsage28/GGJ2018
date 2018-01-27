@@ -3,19 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using System.Linq;
 
 public class GameManager : MonoBehaviour {
+    public static UnityEvent TimeTick;
+
+    private static GameManager instance;
+    
+    [SerializeField]
+    private GameCamera gameCamera;
+    [SerializeField]
+    private Town selectedTown;
+
+    private List<Town> towns;
+
     private float timeScale;
     private float nextTimeStep;
 
-    private float eventChance;
-    private float listenerCount;
-    private float cultistCount;
-    private float moneyCount;
-    private float suspicionLevel;
+    [SerializeField]
+    private float listenerCount = 0;
+    [SerializeField]
+    private float cultistCount = 0;
+    [SerializeField]
+    private float moneyCount = 20000;
+    [SerializeField]
+    private float eventChance = 15;
+    [SerializeField]
+    private float suspicionLevel = 0;
     [SerializeField]
     private float timeStep = 60;
-
+    
     public Text listenerCountText;
     public Text moneyCountText;
     public Text cultistCountText;
@@ -24,7 +41,29 @@ public class GameManager : MonoBehaviour {
     public Canvas HUD;
     public Canvas stationManager;
 
-    public static UnityEvent TimeTick;
+    public static GameManager Instance {
+        get { return instance; }
+        private set {
+            if (instance == null) {
+                instance = value;
+            }
+        }
+    }
+
+    public GameCamera GameCamera {
+        get { return gameCamera; }
+        private set { gameCamera = value; }
+    }
+
+    public Town SelectedTown {
+        get { return selectedTown; }
+        set { selectedTown = value; }
+    }
+
+    public List<Town> Towns {
+        get { return towns; }
+        private set { towns = value; }
+    }
 
     public float ListenerCount {
         get { return listenerCount; }
@@ -56,7 +95,6 @@ public class GameManager : MonoBehaviour {
         set { timeStep = value; }
     }
 
-    // Use this for initialization
     void Start() {
         nextTimeStep = Time.time + TimeStep;
         ListenerCount = 0f;
@@ -65,15 +103,17 @@ public class GameManager : MonoBehaviour {
         EventChance = 15f;
         SuspicionLevel = 0f;
         UpdateText();
+        Towns = FindObjectsOfType<Town>().ToList();
     }
 
     void Awake() {
+        GameCamera = FindObjectOfType<GameCamera>();
+        Instance = this;
         if (TimeTick == null) {
             TimeTick = new UnityEvent();
         }
     }
 
-    // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space)) {
             Time.timeScale = 0;
@@ -89,14 +129,18 @@ public class GameManager : MonoBehaviour {
         }        
     }
 
-    void RandomEvent() {
+    private void RandomEvent() {
         print("a random event happened");
     }
-
+    
     void UpdateText() {
         listenerCountText.text = "Listeners: " + ListenerCount;
         moneyCountText.text = "Money: $" + MoneyCount;
         cultistCountText.text = "Cult Followers: " + CultistCount;
         suspicionLevelText.text = "Suspicion Level: " + SuspicionLevel;
+    }
+
+    public Town getNearestTown(Vector3 pos) {
+        return Towns.OrderBy(t => (t.transform.position - pos).sqrMagnitude).FirstOrDefault();
     }
 }

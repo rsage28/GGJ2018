@@ -1,6 +1,6 @@
 ﻿public enum AdType {
     Beverage,
-    LocalBuisness,
+    LocalBusiness,
     Events,
     Holidays,
     Sports,
