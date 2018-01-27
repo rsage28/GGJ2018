@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour {
     public Text cultistCountText;
     public Text suspicionLevelText;
 
+    public Canvas HUD;
+    public Canvas stationManager;
+
     public static UnityEvent TimeTick;
 
     public float ListenerCount {
@@ -72,8 +75,10 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        ListenerCount += 10f;
-        UpdateText();
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            Time.timeScale = 0;
+        }
+
         if (Time.time >= nextTimeStep) {
             nextTimeStep = Time.time + TimeStep;
             TimeTick.Invoke();

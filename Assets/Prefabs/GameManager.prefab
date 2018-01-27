@@ -56,3 +56,5 @@ MonoBehaviour:
   moneyCountText: {fileID: 0}
   cultistCountText: {fileID: 0}
   suspicionLevelText: {fileID: 0}
+  HUD: {fileID: 0}
+  stationManager: {fileID: 0}
