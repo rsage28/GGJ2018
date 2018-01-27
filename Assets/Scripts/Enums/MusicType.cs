@@ -1,5 +1,4 @@
-﻿public enum MusicType
-{
+﻿public enum MusicType {
     Rock,
     Classical,
     Punk,
