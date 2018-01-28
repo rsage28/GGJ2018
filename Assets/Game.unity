@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -193,9 +193,11 @@ MonoBehaviour:
   preferredAdType: 0
   preferredCultMessageType: 0
   radius: 1.5
-  stationCost: 0
-  stationUpkeep: 0
-  unlockTowns: []
+  stationCost: 60000
+  stationUpkeep: 750
+  unlockTowns:
+  - {fileID: 1271006619}
+  - {fileID: 773508994}
 --- !u!4 &48655424
 Transform:
   m_ObjectHideFlags: 0
@@ -302,8 +304,8 @@ MonoBehaviour:
   preferredAdType: 2
   preferredCultMessageType: 5
   radius: 1.5
-  stationCost: 0
-  stationUpkeep: 0
+  stationCost: 1000000
+  stationUpkeep: 3500
   unlockTowns: []
 --- !u!1001 &176068366
 Prefab:
@@ -1004,8 +1006,8 @@ MonoBehaviour:
   preferredAdType: 0
   preferredCultMessageType: 6
   radius: 1.5
-  stationCost: 0
-  stationUpkeep: 0
+  stationCost: 200000
+  stationUpkeep: 1500
   unlockTowns: []
 --- !u!4 &669831726
 Transform:
@@ -1101,8 +1103,10 @@ MonoBehaviour:
   preferredCultMessageType: 7
   radius: 1.5
   stationCost: 15000
-  stationUpkeep: 0
-  unlockTowns: []
+  stationUpkeep: 1000
+  unlockTowns:
+  - {fileID: 1966078233}
+  - {fileID: 1850168429}
 --- !u!4 &773508995
 Transform:
   m_ObjectHideFlags: 0
@@ -1196,9 +1200,10 @@ MonoBehaviour:
   preferredAdType: 4
   preferredCultMessageType: 1
   radius: 1.5
-  stationCost: 0
-  stationUpkeep: 0
-  unlockTowns: []
+  stationCost: 200000
+  stationUpkeep: 2000
+  unlockTowns:
+  - {fileID: 157468222}
 --- !u!4 &805021240
 Transform:
   m_ObjectHideFlags: 0
@@ -1396,9 +1401,13 @@ MonoBehaviour:
   preferredAdType: 0
   preferredCultMessageType: 2
   radius: 1.5
-  stationCost: 0
-  stationUpkeep: 0
-  unlockTowns: []
+  stationCost: 300000
+  stationUpkeep: 2000
+  unlockTowns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1073497901
 Transform:
   m_ObjectHideFlags: 0
@@ -1492,9 +1501,11 @@ MonoBehaviour:
   preferredAdType: 3
   preferredCultMessageType: 5
   radius: 1.5
-  stationCost: 0
-  stationUpkeep: 0
-  unlockTowns: []
+  stationCost: 150000
+  stationUpkeep: 1000
+  unlockTowns:
+  - {fileID: 773508994}
+  - {fileID: 669831725}
 --- !u!4 &1271006620
 Transform:
   m_ObjectHideFlags: 0
@@ -1589,10 +1600,9 @@ MonoBehaviour:
   preferredCultMessageType: 4
   radius: 1.5
   stationCost: 0
-  stationUpkeep: 0
+  stationUpkeep: 500
   unlockTowns:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2054430554}
 --- !u!4 &1581971107
 Transform:
   m_ObjectHideFlags: 0
@@ -1877,9 +1887,10 @@ MonoBehaviour:
   preferredAdType: 1
   preferredCultMessageType: 7
   radius: 1.5
-  stationCost: 0
-  stationUpkeep: 0
-  unlockTowns: []
+  stationCost: 75000
+  stationUpkeep: 1000
+  unlockTowns:
+  - {fileID: 805021239}
 --- !u!4 &1850168430
 Transform:
   m_ObjectHideFlags: 0
@@ -2204,9 +2215,10 @@ MonoBehaviour:
   preferredAdType: 7
   preferredCultMessageType: 2
   radius: 1.5
-  stationCost: 0
-  stationUpkeep: 0
-  unlockTowns: []
+  stationCost: 100000
+  stationUpkeep: 1000
+  unlockTowns:
+  - {fileID: 805021239}
 --- !u!4 &1966078234
 Transform:
   m_ObjectHideFlags: 0
@@ -2306,9 +2318,11 @@ MonoBehaviour:
   preferredAdType: 5
   preferredCultMessageType: 3
   radius: 1.5
-  stationCost: 0
-  stationUpkeep: 0
-  unlockTowns: []
+  stationCost: 50000
+  stationUpkeep: 500
+  unlockTowns:
+  - {fileID: 1073497900}
+  - {fileID: 48655423}
 --- !u!4 &2054430555
 Transform:
   m_ObjectHideFlags: 0
