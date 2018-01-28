@@ -27,7 +27,8 @@ public class GameCamera : MonoBehaviour {
     [SerializeField]
     private float panBuffer = 10;
     [SerializeField]
-	private CameraZoomType cameraZoomType;
+    private CameraZoomType cameraZoomType;
+    private AudioSource audioSource;
 
     public float MinZoom {
 		get { return minZoom; }
@@ -77,6 +78,7 @@ public class GameCamera : MonoBehaviour {
 
     void Start () {
         Camera.main.fieldOfView = Zoom;
+        audioSource = GetComponent<AudioSource>();
 	}
 
 	void Update () {
@@ -162,6 +164,7 @@ public class GameCamera : MonoBehaviour {
             if (Vector3.Distance(mousePos, nearestTown.transform.position) < nearestTown.Radius) {
                 GameManager.Instance.SelectTown(GameManager.Instance.SelectedTown == nearestTown ? null : nearestTown);
                 GameManager.Instance.SelectRadioStation(nearestTown.ContainedStation);
+                audioSource.Play();
             }
         }
 
