@@ -196,7 +196,7 @@ public class GameManager : MonoBehaviour {
             preferredMusicTypeText.text = "Preferred Music Type: " + SelectedTown.PreferredMusicType.ToString();
             preferredAdTypeText.text = "Prefered Ad Type: " + SelectedTown.PreferredAdType.ToString();
             preferredCultTypeText.text = "Preferred Cult Type: " + SelectedTown.PreferredCultMessageType.ToString();
-            stationCostText.text = "Station Cost: ";
+            stationCostText.text = "Station Cost: " + SelectedTown.StationCost.ToString();
         }
     }
 
@@ -219,11 +219,13 @@ public class GameManager : MonoBehaviour {
     }
 
     public void BuyStation() {
-        if (SelectedTown.ContainedStation == null) {
+        if (SelectedTown.ContainedStation == null && MoneyCount >= SelectedTown.StationCost) {
+            MoneyCount -= SelectedTown.StationCost;
             Station newStation = Instantiate(stationClone, SelectedTown.transform);
             SelectedTown.ContainedStation = newStation;
             newStation.ContainingTown = SelectedTown;
             SelectRadioStation(newStation);
+            UpdateText();
         }        
     }
 

@@ -69,12 +69,6 @@ public class Town : MonoBehaviour {
         set { stationCost = value; }
     }
 
-    void Start () {
-	}
-	
-	void Update () {
-	}
-
     void OnDrawGizmos() {
         //Gizmos.DrawSphere(transform.position, Radius);
     }

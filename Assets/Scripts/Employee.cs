@@ -29,14 +29,4 @@ public class Employee : MonoBehaviour {
         get { return happiness; }
         set { happiness = value; }
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

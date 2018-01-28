@@ -435,7 +435,7 @@ Prefab:
     - target: {fileID: 224739266255855872, guid: 132f4ceb91ce6b6488fdbacd38de4a94,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224325111132688428, guid: 132f4ceb91ce6b6488fdbacd38de4a94,
         type: 2}
@@ -1079,7 +1079,7 @@ MonoBehaviour:
   preferredAdType: 6
   preferredCultMessageType: 7
   radius: 1.5
-  stationCost: 0
+  stationCost: 15000
 --- !u!4 &773508995
 Transform:
   m_ObjectHideFlags: 0
