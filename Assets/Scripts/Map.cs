@@ -9,14 +9,4 @@ public class Map : MonoBehaviour {
         get { return towns; } 
         set { towns = value; }
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

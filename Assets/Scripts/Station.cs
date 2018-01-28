@@ -18,6 +18,8 @@ public class Station : MonoBehaviour {
     [SerializeField]
     private float cultTimePercent;
     [SerializeField]
+    private float stationUpkeep;
+    [SerializeField]
     private List<Employee> employees;
     [SerializeField]
     private float moneyVsHappiness;

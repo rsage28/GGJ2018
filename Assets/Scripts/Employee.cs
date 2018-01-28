@@ -5,7 +5,9 @@ using UnityEngine;
 public class Employee : MonoBehaviour {
     private float wage;
     private float careCost;
+    [Range(0, 100)]
     private float loyalty;
+    [Range(0, 100)]
     private float happiness;
 
     public float Wage {
@@ -27,14 +29,4 @@ public class Employee : MonoBehaviour {
         get { return happiness; }
         set { happiness = value; }
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

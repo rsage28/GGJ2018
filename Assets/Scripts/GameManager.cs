@@ -64,11 +64,19 @@ public class GameManager : MonoBehaviour {
     public Dropdown cultTypes;
     public Dropdown marketingTypes;
 
+    // Station sliders
+    public Slider musicTime;
+    public Slider adTime;
+    public Slider cultTime;
+    public Slider moneyVsHappy;
+
     public Canvas HUD;
     public Canvas stationManager;
     public Canvas townInfo;
 
+    // Objects to create
     public Station stationClone;
+    public Employee employeeClone;
 
     public static GameManager Instance {
         get { return instance; }
@@ -188,7 +196,7 @@ public class GameManager : MonoBehaviour {
             preferredMusicTypeText.text = "Preferred Music Type: " + SelectedTown.PreferredMusicType.ToString();
             preferredAdTypeText.text = "Prefered Ad Type: " + SelectedTown.PreferredAdType.ToString();
             preferredCultTypeText.text = "Preferred Cult Type: " + SelectedTown.PreferredCultMessageType.ToString();
-            stationCostText.text = "Station Cost: ";
+            stationCostText.text = "Station Cost: " + SelectedTown.StationCost.ToString();
         }
     }
 
@@ -200,18 +208,25 @@ public class GameManager : MonoBehaviour {
             adTypes.value = (int) SelectedStation.Ad;
             cultTypes.value = (int) SelectedStation.Cult;
             marketingTypes.value = (int) SelectedStation.MarketingPlan;
-            musicEffectivePercentText.text = SelectedStation.MusicEffectivePercent.ToString();
-            propEffectivePercentText.text = SelectedStation.PropagandaEffectivePercent.ToString();
-            employeeCountText.text = SelectedStation.Employees.Count.ToString();
-
+            musicEffectivePercentText.text = "Music Effectiveness: " + SelectedStation.MusicEffectivePercent.ToString() + "%";
+            propEffectivePercentText.text = "Propaganda Effectiveness: " + SelectedStation.PropagandaEffectivePercent.ToString() + "%";
+            employeeCountText.text = "Employee Count: " + SelectedStation.Employees.Count.ToString();
+            musicTime.value = SelectedStation.MusicTimePercent / 100;
+            adTime.value = SelectedStation.AdTimePercent / 100;
+            cultTime.value = SelectedStation.CultTimePercent / 100;
+            moneyVsHappy.value = SelectedStation.MoneyVsHappiness / 100;
         }
     }
 
     public void BuyStation() {
-        Station newStation = Instantiate(stationClone, SelectedTown.transform);
-        SelectedTown.ContainedStation = newStation;
-        newStation.ContainingTown = SelectedTown;
-        SelectRadioStation(newStation);
+        if (SelectedTown.ContainedStation == null && MoneyCount >= SelectedTown.StationCost) {
+            MoneyCount -= SelectedTown.StationCost;
+            Station newStation = Instantiate(stationClone, SelectedTown.transform);
+            SelectedTown.ContainedStation = newStation;
+            newStation.ContainingTown = SelectedTown;
+            SelectRadioStation(newStation);
+            UpdateText();
+        }        
     }
 
     void PopulateMusicDropdown() {
@@ -256,5 +271,38 @@ public class GameManager : MonoBehaviour {
 
     public void MarketingDropdownIndexChange(int index) {
         SelectedStation.MarketingPlan = (MarketingPlanType) index;
+    }
+
+    public void MusicTimeChange(float value) {
+        SelectedStation.MusicTimePercent = value * 100;
+    }
+
+    public void AdTimeChange(float value) {
+        SelectedStation.AdTimePercent = value * 100;
+    }
+
+    public void CultTimeChange(float value) {
+        SelectedStation.CultTimePercent = value * 100;
+    }
+
+    public void MoneyVsHappyChange(float value) {
+        SelectedStation.MoneyVsHappiness = value * 100;
+    }
+
+    public void HireEmployee() {
+        Employee freshMeat = Instantiate(employeeClone, SelectedStation.transform);
+        freshMeat.Wage = 250f;
+        freshMeat.CareCost = 0f;
+        freshMeat.Loyalty = 0f;
+        freshMeat.Happiness = 50f;
+        SelectedStation.Employees.Add(freshMeat);
+        employeeCountText.text = "Employee Count: " + SelectedStation.Employees.Count.ToString();
+    }
+
+    public void FireEmployee() {
+        if (SelectedStation.Employees.Count > 0) {
+            SelectedStation.Employees.RemoveAt(0);
+            employeeCountText.text = "Employee Count: " + SelectedStation.Employees.Count.ToString();
+        }
     }
 }
