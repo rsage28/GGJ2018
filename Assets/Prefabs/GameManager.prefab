@@ -66,16 +66,20 @@ MonoBehaviour:
   gameCamera: {fileID: 0}
   selectedTown: {fileID: 0}
   selectedStation: {fileID: 0}
+  unlockedTowns:
+  - {fileID: 0}
+  eventList: {fileID: 0}
   listenerCount: 0
   cultistCount: 0
   moneyCount: 20000
   eventChance: 15
   suspicionLevel: 0
-  timeStep: 60
+  timeStep: 15
   listenerCountText: {fileID: 0}
   moneyCountText: {fileID: 0}
   cultistCountText: {fileID: 0}
   suspicionLevelText: {fileID: 0}
+  townName: {fileID: 0}
   populationCountText: {fileID: 0}
   listenerCountTextTown: {fileID: 0}
   cultistCountTextTown: {fileID: 0}
@@ -84,6 +88,7 @@ MonoBehaviour:
   preferredAdTypeText: {fileID: 0}
   preferredCultTypeText: {fileID: 0}
   stationCostText: {fileID: 0}
+  buyStationButton: {fileID: 0}
   musicEffectivePercentText: {fileID: 0}
   propEffectivePercentText: {fileID: 0}
   employeeCountText: {fileID: 0}
@@ -92,9 +97,21 @@ MonoBehaviour:
   adTypes: {fileID: 0}
   cultTypes: {fileID: 0}
   marketingTypes: {fileID: 0}
+  musicTime: {fileID: 0}
+  adTime: {fileID: 0}
+  cultTime: {fileID: 0}
+  moneyVsHappy: {fileID: 0}
+  eventText: {fileID: 0}
+  buttonText1: {fileID: 0}
+  buttonText2: {fileID: 0}
+  buttonText3: {fileID: 0}
+  button1: {fileID: 0}
+  button2: {fileID: 0}
+  button3: {fileID: 0}
   HUD: {fileID: 0}
   stationManager: {fileID: 0}
   townInfo: {fileID: 0}
+  eventUI: {fileID: 0}
   stationClone: {fileID: 114931660299653106, guid: 6cc2a2b029a983d469c8449e186f5b43,
     type: 2}
   employeeClone: {fileID: 114461671284200236, guid: 7124a278623bc93478a870f64f2cd903,

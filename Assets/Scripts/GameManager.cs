@@ -296,6 +296,30 @@ public class GameManager : MonoBehaviour {
         moneyCountText.text = "Money: $" + MoneyCount;
         cultistCountText.text = "Cult Followers: " + CultistCount;
         suspicionLevelText.text = "Suspicion Level: " + SuspicionLevel;
+        if (townInfo.enabled) {
+            townName.text = "Town Name: " + SelectedTown.name;
+            populationCountText.text = "Town Population: " + SelectedTown.Population;
+            listenerCountTextTown.text = "Listener Count: " + SelectedTown.Listeners;
+            cultistCountTextTown.text = "Cultist Count: " + SelectedTown.Cultists;
+            convertabilityLevelText.text = "Convertability Level: " + SelectedTown.Convertability + "%";
+            preferredMusicTypeText.text = "Preferred Music Type: " + SelectedTown.PreferredMusicType.ToString();
+            preferredAdTypeText.text = "Prefered Ad Type: " + SelectedTown.PreferredAdType.ToString();
+            preferredCultTypeText.text = "Preferred Cult Type: " + SelectedTown.PreferredCultMessageType.ToString();
+            stationCostText.text = "Station Cost: " + SelectedTown.StationCost.ToString();
+        }
+        if (stationManager.enabled) {
+            musicTypes.value = (int) SelectedStation.ChosenMusicType;
+            adTypes.value = (int) SelectedStation.ChosenAdType;
+            cultTypes.value = (int) SelectedStation.ChosenCultMessageType;
+            marketingTypes.value = (int) SelectedStation.ChosenMarketingPlanType;
+            musicEffectivePercentText.text = "Music Effectiveness: " + SelectedStation.MusicEffectivePercent.ToString() + "%";
+            propEffectivePercentText.text = "Propaganda Effectiveness: " + SelectedStation.PropagandaEffectivePercent.ToString() + "%";
+            employeeCountText.text = "Employee Count: " + SelectedStation.Employees.Count.ToString();
+            musicTime.value = SelectedStation.MusicTimePercent;
+            adTime.value = SelectedStation.AdTimePercent;
+            cultTime.value = SelectedStation.CultTimePercent;
+            moneyVsHappy.value = SelectedStation.MoneyVsHappiness;
+        }
     }
 
     public Town getNearestTown(Vector3 pos) {
@@ -329,10 +353,10 @@ public class GameManager : MonoBehaviour {
             musicEffectivePercentText.text = "Music Effectiveness: " + SelectedStation.MusicEffectivePercent.ToString() + "%";
             propEffectivePercentText.text = "Propaganda Effectiveness: " + SelectedStation.PropagandaEffectivePercent.ToString() + "%";
             employeeCountText.text = "Employee Count: " + SelectedStation.Employees.Count.ToString();
-            musicTime.value = SelectedStation.MusicTimePercent / 100;
-            adTime.value = SelectedStation.AdTimePercent / 100;
-            cultTime.value = SelectedStation.CultTimePercent / 100;
-            moneyVsHappy.value = SelectedStation.MoneyVsHappiness / 100;
+            musicTime.value = SelectedStation.MusicTimePercent;
+            adTime.value = SelectedStation.AdTimePercent;
+            cultTime.value = SelectedStation.CultTimePercent;
+            moneyVsHappy.value = SelectedStation.MoneyVsHappiness;
         }
     }
 
@@ -343,6 +367,9 @@ public class GameManager : MonoBehaviour {
             SelectedTown.ContainedStation = newStation;
             newStation.StationUpkeep = SelectedTown.StationUpkeep;
             newStation.ContainingTown = SelectedTown;
+            newStation.MusicEffectivePercent = 1;
+            newStation.PropagandaEffectivePercent = 1;
+            newStation.AdvertisingRevenuePercent = 1;
             SelectRadioStation(newStation);
             UpdateText();
             foreach(Town t in SelectedTown.UnlockTowns) {
@@ -398,19 +425,19 @@ public class GameManager : MonoBehaviour {
     }
 
     public void MusicTimeChange(float value) {
-        SelectedStation.MusicTimePercent = value * 100;
+        SelectedStation.MusicTimePercent = value ;
     }
 
     public void AdTimeChange(float value) {
-        SelectedStation.AdTimePercent = value * 100;
+        SelectedStation.AdTimePercent = value;
     }
 
     public void CultTimeChange(float value) {
-        SelectedStation.CultTimePercent = value * 100;
+        SelectedStation.CultTimePercent = value;
     }
 
     public void MoneyVsHappyChange(float value) {
-        SelectedStation.MoneyVsHappiness = value * 100;
+        SelectedStation.MoneyVsHappiness = value;
     }
 
     public void HireEmployee() {

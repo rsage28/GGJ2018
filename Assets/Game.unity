@@ -579,11 +579,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
-        type: 2}
-      propertyPath: unlockedTowns.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4578309388113666, guid: 0aba6bb5324cd914883ef300e661c8d1, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -623,6 +618,11 @@ Prefab:
       objectReference: {fileID: 1033321070}
     - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
         type: 2}
+      propertyPath: unlockedTowns.Array.data[0]
+      value: 
+      objectReference: {fileID: 1581971106}
+    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
+        type: 2}
       propertyPath: listenerCountText
       value: 
       objectReference: {fileID: 1670437921}
@@ -641,6 +641,11 @@ Prefab:
       propertyPath: suspicionLevelText
       value: 
       objectReference: {fileID: 1670437918}
+    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
+        type: 2}
+      propertyPath: townName
+      value: 
+      objectReference: {fileID: 1964053723}
     - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
         type: 2}
       propertyPath: populationCountText
@@ -683,6 +688,11 @@ Prefab:
       objectReference: {fileID: 1964053716}
     - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
         type: 2}
+      propertyPath: buyStationButton
+      value: 
+      objectReference: {fileID: 1980672347}
+    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
+        type: 2}
       propertyPath: musicEffectivePercentText
       value: 
       objectReference: {fileID: 176068375}
@@ -723,21 +733,6 @@ Prefab:
       objectReference: {fileID: 176068368}
     - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
         type: 2}
-      propertyPath: HUD
-      value: 
-      objectReference: {fileID: 1670437917}
-    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
-        type: 2}
-      propertyPath: stationManager
-      value: 
-      objectReference: {fileID: 176068367}
-    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
-        type: 2}
-      propertyPath: townInfo
-      value: 
-      objectReference: {fileID: 1964053715}
-    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
-        type: 2}
       propertyPath: musicTime
       value: 
       objectReference: {fileID: 176068379}
@@ -758,39 +753,9 @@ Prefab:
       objectReference: {fileID: 176068376}
     - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
         type: 2}
-      propertyPath: buyStationButton
-      value: 
-      objectReference: {fileID: 1980672347}
-    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
-        type: 2}
-      propertyPath: unlockedTowns.Array.data[0]
-      value: 
-      objectReference: {fileID: 1581971106}
-    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
-        type: 2}
-      propertyPath: townName
-      value: 
-      objectReference: {fileID: 1964053723}
-    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
-        type: 2}
       propertyPath: eventText
       value: 
       objectReference: {fileID: 685615436}
-    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
-        type: 2}
-      propertyPath: button1
-      value: 
-      objectReference: {fileID: 606451887}
-    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
-        type: 2}
-      propertyPath: button2
-      value: 
-      objectReference: {fileID: 103447371}
-    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
-        type: 2}
-      propertyPath: button3
-      value: 
-      objectReference: {fileID: 929429992}
     - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
         type: 2}
       propertyPath: buttonText1
@@ -808,14 +773,34 @@ Prefab:
       objectReference: {fileID: 201769006}
     - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
         type: 2}
-      propertyPath: eventChance
-      value: 100
-      objectReference: {fileID: 0}
+      propertyPath: button1
+      value: 
+      objectReference: {fileID: 606451887}
     - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
         type: 2}
-      propertyPath: timeStep
-      value: 15
-      objectReference: {fileID: 0}
+      propertyPath: button2
+      value: 
+      objectReference: {fileID: 103447371}
+    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
+        type: 2}
+      propertyPath: button3
+      value: 
+      objectReference: {fileID: 929429992}
+    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
+        type: 2}
+      propertyPath: HUD
+      value: 
+      objectReference: {fileID: 1670437917}
+    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
+        type: 2}
+      propertyPath: stationManager
+      value: 
+      objectReference: {fileID: 176068367}
+    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
+        type: 2}
+      propertyPath: townInfo
+      value: 
+      objectReference: {fileID: 1964053715}
     - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
         type: 2}
       propertyPath: eventUI
@@ -1710,6 +1695,16 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224072133714042384, guid: 1e4351af302a22d429df056086972672,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 224072133714042384, guid: 1e4351af302a22d429df056086972672,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 725.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e4351af302a22d429df056086972672, type: 2}
