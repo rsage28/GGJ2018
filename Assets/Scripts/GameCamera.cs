@@ -191,7 +191,7 @@ public class GameCamera : MonoBehaviour {
     void OnDrawGizmos() {
         if (ZoomInSwitchCount > 0) {
             //GUI.Label(new Rect(Screen.width/2, 5, 20, 10), "Switching Zoom - "+Mathf.Floor(100*ZoomSwitchCount/ZoomSwitchMax)+"%");
-            UnityEditor.Handles.Label(transform.position + new Vector3(0,0,1), "Switching Zoom - "+Mathf.Floor(100*ZoomInSwitchCount/ZoomSwitchMax)+"%");
+            //UnityEditor.Handles.Label(transform.position + new Vector3(0,0,1), "Switching Zoom - "+Mathf.Floor(100*ZoomInSwitchCount/ZoomSwitchMax)+"%");
         }
     }
 }
