@@ -917,6 +917,11 @@ Prefab:
       propertyPath: unlockedTowns.Array.data[0]
       value: 
       objectReference: {fileID: 1581971106}
+    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
+        type: 2}
+      propertyPath: townName
+      value: 
+      objectReference: {fileID: 1964053723}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0aba6bb5324cd914883ef300e661c8d1, type: 2}
   m_IsPrefabParent: 0
@@ -2079,6 +2084,11 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 434370719}
+    - target: {fileID: 223012437118237118, guid: cc7682ed8128f7b48a1c9b3325d45ad9,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc7682ed8128f7b48a1c9b3325d45ad9, type: 2}
   m_IsPrefabParent: 0
