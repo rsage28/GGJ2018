@@ -231,15 +231,4 @@ public class Event : ScriptableObject {
 		set { followupDelayAfterDuration = value;; }
 	}
 #endregion
-
-	public Event() {}
-
-	public Event(string eventText) {
-		this.EventText = eventText;
-	}
-
-	public Event(string eventText, string ongoignShortText) {
-		this.EventText = eventText;
-		this.OngoingShortText = ongoignShortText;
-	}
 }

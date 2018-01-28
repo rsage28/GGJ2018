@@ -248,8 +248,6 @@ public class GameManager : MonoBehaviour {
 
         return requirementsMet;
     }
-
-
     
     void UpdateText() {
         listenerCountText.text = "Listeners: " + ListenerCount;

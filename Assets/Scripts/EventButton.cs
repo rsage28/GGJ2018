@@ -17,15 +17,4 @@ public class EventButton : ScriptableObject {
 		get { return buttonEvent; }
 		set { buttonEvent = value; }
 	}
-
-	public EventButton() {}
-
-	public EventButton(string text) {
-		this.text = text;
-	}
-
-	public EventButton(string text, Event buttonEvent) {
-		this.text = text;
-		this.buttonEvent = buttonEvent;
-	}
 }
