@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour {
     private float nextTimeStep;
 
     [SerializeField]
+    EventList eventList;
+
+    [SerializeField]
     private float listenerCount = 0;
     [SerializeField]
     private float cultistCount = 0;
@@ -164,6 +167,7 @@ public class GameManager : MonoBehaviour {
         if (TimeTick == null) {
             TimeTick = new UnityEvent();
         }
+        eventList = new EventList();
     }
 
     void Update() {
@@ -175,7 +179,7 @@ public class GameManager : MonoBehaviour {
             nextTimeStep = Time.time + TimeStep;
             TimeTick.Invoke();
             if (UnityEngine.Random.Range(0, 100) <= EventChance) {
-                RandomEvent();
+                randomEvent();
             }
             UpdateText();
         }
@@ -185,8 +189,33 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private void RandomEvent() {
-        print("a random event happened");
+    private void randomEvent() {
+        Event chosenEvent = null;
+        int attempts = 0;
+        int maxAttempts = 10;
+        while (chosenEvent == null && attempts < maxAttempts) {
+            KeyValuePair<Event, int> randomEvent = eventList.Events.ElementAt(UnityEngine.Random.Range(0, eventList.Events.Count));
+            maxAttempts++;
+            if (UnityEngine.Random.Range(0, 100) <= randomEvent.Value && eventRequirementsMet(randomEvent.Key)) {
+                chosenEvent = randomEvent.Key;
+                if (chosenEvent.NeedsTown) {
+                    while (chosenEvent.AffectedTown == null) {
+                        Town randomTown = UnlockedTowns[UnityEngine.Random.Range(0, UnlockedTowns.Count)];
+                        if (randomTown.ContainedStation != null) {
+                            chosenEvent.AffectedTown = randomTown;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private bool eventRequirementsMet(Event eventToCheck) {
+        bool requirementsMet = true;
+        if (cultistCount > eventToCheck.GlobalCultistMaxRequirement) {
+            requirementsMet = false;
+        }
+        return requirementsMet;
     }
     
     void UpdateText() {

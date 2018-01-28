@@ -39,6 +39,9 @@ public class Event : ScriptableObject {
 	private int towerMinRequirement = 1;
 	[SerializeField]
 	private int moneyMinRequirement = 0;
+
+	[SerializeField]
+	private int suspicionMinRequirement = 0;
 	[SerializeField]
 	private int localListenerMinRequirement = 0;
 	[SerializeField]
@@ -48,6 +51,8 @@ public class Event : ScriptableObject {
 	[SerializeField]
 	private int globalCultistMinRequirement = 0;
 	[SerializeField]
+	private int suspicionMaxRequirement = int.MaxValue;
+	[SerializeField]
 	private int localListenerMaxRequirement = int.MaxValue;
 	[SerializeField]
 	private int globalListenerMaxRequirement = int.MaxValue;
@@ -56,6 +61,8 @@ public class Event : ScriptableObject {
 	[SerializeField]
 	private int globalCultistMaxRequirement = int.MaxValue;
 
+	[SerializeField]
+	private bool needsTown;
 	[SerializeField]
 	private Town affectedTown;
 	[SerializeField]
@@ -133,6 +140,11 @@ public class Event : ScriptableObject {
 		set { moneyMinRequirement = value; }
 	}
 
+	public int SuspicionMinRequirement {
+		get { return suspicionMinRequirement; }
+		set { suspicionMinRequirement = value; }
+	}
+
 	public int LocalListenerMinRequirement {
 		get { return localListenerMinRequirement; }
 		set { localListenerMinRequirement = value; }
@@ -151,6 +163,11 @@ public class Event : ScriptableObject {
 	public int GlobalCultistMinRequirement {
 		get { return globalCultistMinRequirement; }
 		set { globalCultistMinRequirement = value; }
+	}
+
+	public int SuspicionMaxRequirement {
+		get { return suspicionMaxRequirement; }
+		set { suspicionMaxRequirement = value; }
 	}
 
 	public int LocalListenerMaxRequirement {
@@ -174,6 +191,11 @@ public class Event : ScriptableObject {
 	}
 #endregion
 #region General Settings
+	public bool NeedsTown {
+		get { return needsTown; }
+		set { needsTown = value; }
+	}
+
 	public Town AffectedTown {
 		get { return affectedTown; }
 		set { affectedTown = value;}
