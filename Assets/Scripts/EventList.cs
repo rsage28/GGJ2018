@@ -17,7 +17,8 @@ public class EventList : MonoBehaviour {
 	}
 
 	private void addDamagedTowerEvent() {
-		Event damagedTower = ScriptableObject.CreateInstance<Event>();;
+		Event damagedTower = ScriptableObject.CreateInstance<Event>();
+        damagedTower.EventButtons = new List<EventButton>();
 		damagedTower.EventText = "Your radio tower at "+damagedTower.AffectedTown+" was damaged in a storm and is now only operating at 50% effectiveness. Do you want to pay to fix it?";
 		damagedTower.NeedsTown = true;
 		damagedTower.TowerMinRequirement = 2;
@@ -47,11 +48,12 @@ public class EventList : MonoBehaviour {
 		damagedTower.EventButtons.Add(yesButton);
 		damagedTower.EventButtons.Add(noButton);
 
-		Events.Add(damagedTower, 10);
+		Events.Add(damagedTower, 100);
 	}
 
 	private void addCultistDamagedTowerEvent() {
 		Event damagedTower = ScriptableObject.CreateInstance<Event>();
+        damagedTower.EventButtons = new List<EventButton>();
 		damagedTower.EventText = "Your radio tower at "+damagedTower.AffectedTown+" was damaged in a storm and is now only operating at 50% effectiveness. Do you want to pay to fix it?";
 		damagedTower.NeedsTown = true;
 		damagedTower.TowerMinRequirement = 2;

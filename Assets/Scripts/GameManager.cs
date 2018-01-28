@@ -79,9 +79,22 @@ public class GameManager : MonoBehaviour {
     public Slider cultTime;
     public Slider moneyVsHappy;
 
+    // Event Text
+    public Text eventText;
+    public Text buttonText1;
+    public Text buttonText2;
+    public Text buttonText3;
+
+    // Event Buttons
+    public Button button1;
+    public Button button2;
+    public Button button3;
+
+    // Canvases
     public Canvas HUD;
     public Canvas stationManager;
     public Canvas townInfo;
+    public Canvas eventUI;
 
     // Objects to create
     public Station stationClone;
@@ -206,6 +219,35 @@ public class GameManager : MonoBehaviour {
                 }
             }
         }
+        if (chosenEvent != null) {
+            button1.enabled = false;
+            button2.enabled = false;
+            button3.enabled = false;
+            Time.timeScale = 0;
+            eventUI.enabled = true;
+            eventText.text = chosenEvent.EventText;
+            for (int i = 0; i < chosenEvent.EventButtons.Count; i++) {
+                switch(i) {
+                    case 0:
+                        button1.enabled = true;
+                        button1.onClick.AddListener(DismissEvent);
+                        buttonText1.text = chosenEvent.EventButtons[i].Text; break;
+                    case 1:
+                        button2.enabled = true;
+                        button2.onClick.AddListener(DismissEvent);
+                        buttonText2.text = chosenEvent.EventButtons[i].Text; break;
+                    case 2:
+                        button3.enabled = true;
+                        button3.onClick.AddListener(DismissEvent);
+                        buttonText3.text = chosenEvent.EventButtons[i].Text; break;
+                }
+            }
+        }
+    }
+
+    private void DismissEvent() {
+        Time.timeScale = 1;
+        eventUI.enabled = false;
     }
 
     private bool globalEventRequirementsMet(Event eventToCheck) {
