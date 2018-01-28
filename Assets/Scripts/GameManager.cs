@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private Station selectedStation;
 
-    private List<Town> towns;
+    private List<Town> towns = new List<Town>();
+    [SerializeField]
+    private List<Town> unlockedTowns = new List<Town>();
 
     private float timeScale;
     private float nextTimeStep;
@@ -51,6 +53,9 @@ public class GameManager : MonoBehaviour {
     public Text preferredAdTypeText;
     public Text preferredCultTypeText;
     public Text stationCostText;
+
+    // Town Buttons
+    public Button buyStationButton;
 
     // Station text
     public Text musicEffectivePercentText;
@@ -137,6 +142,11 @@ public class GameManager : MonoBehaviour {
         set { selectedStation = value; }
     }
 
+    public List<Town> UnlockedTowns {
+        get { return unlockedTowns; }
+        set { unlockedTowns = value; }
+    }
+
     void Start() {
         nextTimeStep = Time.time + TimeStep;
         Towns = FindObjectsOfType<Town>().ToList();
@@ -167,6 +177,10 @@ public class GameManager : MonoBehaviour {
                 RandomEvent();
             }
             UpdateText();
+        }
+
+        if (SelectedTown != null) {
+            buyStationButton.interactable = (MoneyCount >= SelectedTown.StationCost && UnlockedTowns.Contains(SelectedTown));
         }
     }
 
@@ -226,6 +240,11 @@ public class GameManager : MonoBehaviour {
             newStation.ContainingTown = SelectedTown;
             SelectRadioStation(newStation);
             UpdateText();
+            foreach(Town t in SelectedTown.UnlockTowns) {
+                if (!UnlockedTowns.Contains(t)) {
+                    UnlockedTowns.Add(t);
+                }
+            }
         }        
     }
 

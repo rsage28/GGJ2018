@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -194,6 +194,8 @@ MonoBehaviour:
   preferredCultMessageType: 0
   radius: 1.5
   stationCost: 0
+  stationUpkeep: 0
+  unlockTowns: []
 --- !u!4 &48655424
 Transform:
   m_ObjectHideFlags: 0
@@ -301,6 +303,8 @@ MonoBehaviour:
   preferredCultMessageType: 5
   radius: 1.5
   stationCost: 0
+  stationUpkeep: 0
+  unlockTowns: []
 --- !u!1001 &176068366
 Prefab:
   m_ObjectHideFlags: 0
@@ -724,6 +728,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
+        type: 2}
+      propertyPath: unlockedTowns.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4578309388113666, guid: 0aba6bb5324cd914883ef300e661c8d1, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -896,6 +905,16 @@ Prefab:
       propertyPath: moneyVsHappy
       value: 
       objectReference: {fileID: 176068376}
+    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
+        type: 2}
+      propertyPath: buyStationButton
+      value: 
+      objectReference: {fileID: 1980672347}
+    - target: {fileID: 114551822053629720, guid: 0aba6bb5324cd914883ef300e661c8d1,
+        type: 2}
+      propertyPath: unlockedTowns.Array.data[0]
+      value: 
+      objectReference: {fileID: 1581971106}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0aba6bb5324cd914883ef300e661c8d1, type: 2}
   m_IsPrefabParent: 0
@@ -986,6 +1005,8 @@ MonoBehaviour:
   preferredCultMessageType: 6
   radius: 1.5
   stationCost: 0
+  stationUpkeep: 0
+  unlockTowns: []
 --- !u!4 &669831726
 Transform:
   m_ObjectHideFlags: 0
@@ -1080,6 +1101,8 @@ MonoBehaviour:
   preferredCultMessageType: 7
   radius: 1.5
   stationCost: 15000
+  stationUpkeep: 0
+  unlockTowns: []
 --- !u!4 &773508995
 Transform:
   m_ObjectHideFlags: 0
@@ -1174,6 +1197,8 @@ MonoBehaviour:
   preferredCultMessageType: 1
   radius: 1.5
   stationCost: 0
+  stationUpkeep: 0
+  unlockTowns: []
 --- !u!4 &805021240
 Transform:
   m_ObjectHideFlags: 0
@@ -1285,7 +1310,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1033321069}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.08, y: -6.78, z: -10}
+  m_LocalPosition: {x: 13.76, y: 17.59, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1372,6 +1397,8 @@ MonoBehaviour:
   preferredCultMessageType: 2
   radius: 1.5
   stationCost: 0
+  stationUpkeep: 0
+  unlockTowns: []
 --- !u!4 &1073497901
 Transform:
   m_ObjectHideFlags: 0
@@ -1466,6 +1493,8 @@ MonoBehaviour:
   preferredCultMessageType: 5
   radius: 1.5
   stationCost: 0
+  stationUpkeep: 0
+  unlockTowns: []
 --- !u!4 &1271006620
 Transform:
   m_ObjectHideFlags: 0
@@ -1560,6 +1589,10 @@ MonoBehaviour:
   preferredCultMessageType: 4
   radius: 1.5
   stationCost: 0
+  stationUpkeep: 0
+  unlockTowns:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1581971107
 Transform:
   m_ObjectHideFlags: 0
@@ -1845,6 +1878,8 @@ MonoBehaviour:
   preferredCultMessageType: 7
   radius: 1.5
   stationCost: 0
+  stationUpkeep: 0
+  unlockTowns: []
 --- !u!4 &1850168430
 Transform:
   m_ObjectHideFlags: 0
@@ -2170,6 +2205,8 @@ MonoBehaviour:
   preferredCultMessageType: 2
   radius: 1.5
   stationCost: 0
+  stationUpkeep: 0
+  unlockTowns: []
 --- !u!4 &1966078234
 Transform:
   m_ObjectHideFlags: 0
@@ -2183,6 +2220,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1980672347 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114416747127755674, guid: cc7682ed8128f7b48a1c9b3325d45ad9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1964053714}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &2054430552
 GameObject:
   m_ObjectHideFlags: 0
@@ -2264,6 +2307,8 @@ MonoBehaviour:
   preferredCultMessageType: 3
   radius: 1.5
   stationCost: 0
+  stationUpkeep: 0
+  unlockTowns: []
 --- !u!4 &2054430555
 Transform:
   m_ObjectHideFlags: 0

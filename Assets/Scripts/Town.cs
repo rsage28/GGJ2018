@@ -22,6 +22,10 @@ public class Town : MonoBehaviour {
     private float radius;
     [SerializeField]
     private float stationCost;
+    [SerializeField]
+    private float stationUpkeep;
+    [SerializeField]
+    private List<Town> unlockTowns = new List<Town>();
 
     public Station ContainedStation {
         get { return containedStation; }
@@ -67,6 +71,16 @@ public class Town : MonoBehaviour {
     public float StationCost {
         get { return stationCost; }
         set { stationCost = value; }
+    }
+
+    public float StationUpkeep {
+        get { return stationUpkeep; }
+        set { stationUpkeep = value; }
+    }
+
+    public List<Town> UnlockTowns {
+        get { return unlockTowns; }
+        set { unlockTowns = value; }
     }
 
     void OnDrawGizmos() {
