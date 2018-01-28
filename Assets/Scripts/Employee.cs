@@ -5,7 +5,9 @@ using UnityEngine;
 public class Employee : MonoBehaviour {
     private float wage;
     private float careCost;
+    [Range(0, 100)]
     private float loyalty;
+    [Range(0, 100)]
     private float happiness;
 
     public float Wage {

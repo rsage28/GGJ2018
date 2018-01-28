@@ -84,6 +84,10 @@ MonoBehaviour:
   preferredAdTypeText: {fileID: 0}
   preferredCultTypeText: {fileID: 0}
   stationCostText: {fileID: 0}
+  musicEffectivePercentText: {fileID: 0}
+  propEffectivePercentText: {fileID: 0}
+  employeeCountText: {fileID: 0}
+  cultistStationCountText: {fileID: 0}
   musicTypes: {fileID: 0}
   adTypes: {fileID: 0}
   cultTypes: {fileID: 0}
@@ -91,4 +95,7 @@ MonoBehaviour:
   HUD: {fileID: 0}
   stationManager: {fileID: 0}
   townInfo: {fileID: 0}
-  stationClone: {fileID: 0}
+  stationClone: {fileID: 114931660299653106, guid: 6cc2a2b029a983d469c8449e186f5b43,
+    type: 2}
+  employeeClone: {fileID: 114461671284200236, guid: 7124a278623bc93478a870f64f2cd903,
+    type: 2}

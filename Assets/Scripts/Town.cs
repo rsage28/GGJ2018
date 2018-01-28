@@ -18,9 +18,10 @@ public class Town : MonoBehaviour {
     private AdType preferredAdType;
     [SerializeField]
     private CultMessageType preferredCultMessageType;
-
     [SerializeField]
     private float radius;
+    [SerializeField]
+    private float stationCost;
 
     public Station ContainedStation {
         get { return containedStation; }
@@ -61,6 +62,11 @@ public class Town : MonoBehaviour {
 
     public float Radius {
         get { return radius; }
+    }
+
+    public float StationCost {
+        get { return stationCost; }
+        set { stationCost = value; }
     }
 
     void Start () {
