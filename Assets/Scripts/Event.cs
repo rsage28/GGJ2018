@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Event : ScriptableObject {
 	[SerializeField]
-	private float moneyChange;
+	private int moneyChange;
 	[SerializeField]
-	private float employeeChange;
+	private int employeeChange;
 	[SerializeField]
-	private float listenerChange;
+	private int listenerChange;
 	[SerializeField]
-	private float cultistChange;
+	private int cultistChange;
 	[SerializeField]
 	private bool causesStationDestruction;
 
@@ -79,22 +79,22 @@ public class Event : ScriptableObject {
 	private int followupDelayAfterDuration;
 
 #region Effects
-	public float MoneyChange {
+	public int MoneyChange {
 		get { return moneyChange; }
 		set { moneyChange = value; }
 	}
 
-	public float EmployeeChange {
+	public int EmployeeChange {
 		get { return employeeChange; }
 		set { employeeChange = value; }
 	}
 
-	public float CultistChange {
+	public int CultistChange {
 		get { return cultistChange; }
 		set { cultistChange = value; }
 	}
 
-	public float ListenerChange {
+	public int ListenerChange {
 		get { return listenerChange; }
 		set { listenerChange = value; }
 	}
@@ -127,6 +127,18 @@ public class Event : ScriptableObject {
 	public float ConvertEffectivenessMult {
 		get { return convertEffectivenessMult; }
 		set { convertEffectivenessMult = value; }
+	}
+	public MusicType ForcedMusicType {
+		get { return forcedMusicType; }
+		set { forcedMusicType = value; }
+	}
+	public AdType ForcedAdType {
+		get { return forcedAdType; }
+		set { forcedAdType = value; }
+	}
+	public CultMessageType ForcedCultMessageType {
+		get { return forcedCultMessageType; }
+		set { forcedCultMessageType = value; }
 	}
 #endregion
 #region Requirements

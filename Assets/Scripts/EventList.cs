@@ -82,5 +82,21 @@ public class EventList : MonoBehaviour {
 
 		Events.Add(damagedTower, 10);
 	}
+
+	private void addSuperchargedTowerEvent() {
+		Event superchargedTower = ScriptableObject.CreateInstance<Event>();
+        superchargedTower.EventButtons = new List<EventButton>();
+		superchargedTower.EventText = "Your radio tower at "+superchargedTower.AffectedTown+" was struck by lightning and somehow became SUPERCHARGED, it'll be more effective for a while, hurray!";
+		superchargedTower.NeedsTown = true;
+		superchargedTower.Duration = 4;
+		superchargedTower.AdEffectivenessMult = 2;
+		superchargedTower.ConvertEffectivenessMult = 2;
+		superchargedTower.MusicEffectivenessMult = 2;
+
+		EventButton okayButton = ScriptableObject.CreateInstance<EventButton>();
+		okayButton.Text = "Okay";
+
+		Events.Add(superchargedTower, 30);
+	}
 	
 }

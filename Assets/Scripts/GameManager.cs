@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField]
     EventList eventList;
+    [SerializeField]
+    List<Event> ongoingEvents;
 
     [SerializeField]
     private float listenerCount = 0;
@@ -181,6 +183,7 @@ public class GameManager : MonoBehaviour {
             TimeTick = new UnityEvent();
         }
         eventList = gameObject.AddComponent<EventList>();
+        ongoingEvents = new List<Event>();
     }
 
     void Update() {
@@ -190,15 +193,63 @@ public class GameManager : MonoBehaviour {
 
         if (Time.time >= nextTimeStep) {
             nextTimeStep = Time.time + TimeStep;
-            TimeTick.Invoke();
+            doOngoingEvents();
             if (UnityEngine.Random.Range(0, 100) <= EventChance) {
                 randomEvent();
             }
+            TimeTick.Invoke();
             UpdateText();
         }
 
         if (SelectedTown != null) {
             buyStationButton.interactable = (MoneyCount >= SelectedTown.StationCost && UnlockedTowns.Contains(SelectedTown));
+        }
+    }
+
+    private void doOngoingEvents() {
+        foreach (Event ongoingEvent in ongoingEvents) {
+            ongoingEvent.Duration--;
+            doEventEffects(ongoingEvent);
+        }
+    }
+
+    private void doEventEffects(Event eventToDo) {
+        MoneyCount += eventToDo.MoneyChange;
+
+        if (eventToDo.AffectedTown != null) {
+            if (eventToDo.CausesStationDestruction) {
+                Destroy(eventToDo.AffectedTown.ContainedStation);
+            }
+            
+            if (eventToDo.EmployeeChange > 0) {
+                for (int i = 0; i < eventToDo.EmployeeChange; i++) {
+                    HireEmployee(eventToDo.AffectedTown.ContainedStation);
+                }
+            } else if (eventToDo.EmployeeChange < 0) {
+                for (int i = 0; i < eventToDo.EmployeeChange; i++) {
+                    FireEmployee(eventToDo.AffectedTown.ContainedStation);
+                }
+            }
+            
+            if (eventToDo.ForcedMusicType != null) {
+                eventToDo.AffectedTown.ContainedStation.ChosenMusicType = eventToDo.ForcedMusicType;
+            }
+            if (eventToDo.ForcedAdType != null) {
+                eventToDo.AffectedTown.ContainedStation.ChosenAdType = eventToDo.ForcedAdType;
+            }
+            if (eventToDo.ForcedCultMessageType != null) {
+                eventToDo.AffectedTown.ContainedStation.ChosenCultMessageType = eventToDo.ForcedCultMessageType;
+            }
+
+            eventToDo.AffectedTown.Listeners += eventToDo.ListenerChange;
+            eventToDo.AffectedTown.Cultists += eventToDo.CultistChange;
+
+            //eventToDo.MusicEffectivenessPlus
+            //eventToDo.AdEffectivenessPlus
+            //eventToDo.ConvertEffectivenessPlus
+            //eventToDo.MusicEffectivenessMult
+            //eventToDo.AdEffectivenessMult
+            //eventToDo.ConvertEffectivenessMult
         }
     }
 
@@ -215,6 +266,10 @@ public class GameManager : MonoBehaviour {
                     if (affectedTown != null) {
                         chosenEvent = randomEvent.Key;
                         chosenEvent.AffectedTown = affectedTown;
+                        doEventEffects(chosenEvent);
+                        if (chosenEvent.Duration > 0) {
+                            ongoingEvents.Add(chosenEvent);
+                        }
                     }
                 }
             }
@@ -441,19 +496,27 @@ public class GameManager : MonoBehaviour {
     }
 
     public void HireEmployee() {
-        Employee freshMeat = Instantiate(employeeClone, SelectedStation.transform);
+        HireEmployee(SelectedStation);
+    }
+
+    public void HireEmployee(Station stationToHireAt) {
+        Employee freshMeat = Instantiate(employeeClone, stationToHireAt.transform);
         freshMeat.Wage = 250f;
         freshMeat.CareCost = 0f;
         freshMeat.Loyalty = 0f;
         freshMeat.Happiness = 50f;
-        SelectedStation.AddEmployee(freshMeat);
-        employeeCountText.text = "Employee Count: " + SelectedStation.Employees.Count.ToString();
+        stationToHireAt.AddEmployee(freshMeat);
+        employeeCountText.text = "Employee Count: " + stationToHireAt.Employees.Count.ToString();
     }
 
     public void FireEmployee() {
-        if (SelectedStation.Employees.Count > 0) {
-            SelectedStation.Employees.RemoveAt(0);
-            employeeCountText.text = "Employee Count: " + SelectedStation.Employees.Count.ToString();
+        FireEmployee(SelectedStation);
+    }
+
+    public void FireEmployee(Station stationToFireFrom) {
+        if (stationToFireFrom.Employees.Count > 0) {
+            stationToFireFrom.Employees.RemoveAt(0);
+            employeeCountText.text = "Employee Count: " + stationToFireFrom.Employees.Count.ToString();
         }
     }
 }
