@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour {
     public Text suspicionLevelText;
 
     // Town info text
+    public Text townName;
     public Text populationCountText;
     public Text listenerCountTextTown;
     public Text cultistCountTextTown;
@@ -203,6 +204,7 @@ public class GameManager : MonoBehaviour {
         SelectedTown = town;
         townInfo.enabled = town != null;
         if (townInfo.enabled) {
+            townName.text = "Town Name: " + SelectedTown.name;
             populationCountText.text = "Town Population: " + SelectedTown.Population;
             listenerCountTextTown.text = "Listener Count: " + SelectedTown.Listeners;
             cultistCountTextTown.text = "Cultist Count: " + SelectedTown.Cultists;
@@ -237,6 +239,7 @@ public class GameManager : MonoBehaviour {
             MoneyCount -= SelectedTown.StationCost;
             Station newStation = Instantiate(stationClone, SelectedTown.transform);
             SelectedTown.ContainedStation = newStation;
+            newStation.StationUpkeep = SelectedTown.StationUpkeep;
             newStation.ContainingTown = SelectedTown;
             SelectRadioStation(newStation);
             UpdateText();
@@ -314,7 +317,7 @@ public class GameManager : MonoBehaviour {
         freshMeat.CareCost = 0f;
         freshMeat.Loyalty = 0f;
         freshMeat.Happiness = 50f;
-        SelectedStation.Employees.Add(freshMeat);
+        SelectedStation.AddEmployee(freshMeat);
         employeeCountText.text = "Employee Count: " + SelectedStation.Employees.Count.ToString();
     }
 

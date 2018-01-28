@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Station : MonoBehaviour {
     private Town containingTown;
+    private float totalEmployeeCost;
+    private float totalIncomePerTimeTick;
 
     [SerializeField]
     private float musicEffectivePercent;
@@ -21,7 +23,7 @@ public class Station : MonoBehaviour {
     private float stationUpkeep;
     [SerializeField]
     private List<Employee> employees;
-    [SerializeField]
+    [SerializeField, Range(0, 100)]
     private float moneyVsHappiness;
     [SerializeField]
     private MarketingPlanType marketingPlan;
@@ -99,6 +101,21 @@ public class Station : MonoBehaviour {
         set { cultTimePercent = value; }
     }
 
+    public float TotalEmployeeCost {
+        get { return totalEmployeeCost; }
+        set { totalEmployeeCost = value; }
+    }
+
+    public float TotalIncomePerTimeTick {
+        get { return totalIncomePerTimeTick; }
+        set { totalIncomePerTimeTick = value; }
+    }
+
+    public float StationUpkeep {
+        get { return stationUpkeep; }
+        set { stationUpkeep = value; }
+    }
+
     // Use this for initialization
     void Start() {
         GameManager.TimeTick.AddListener(OnTimeTick);
@@ -111,5 +128,10 @@ public class Station : MonoBehaviour {
 
     void OnTimeTick() {
         print("some shit here");
+    }
+
+    public void AddEmployee(Employee freshMeat) {
+        Employees.Add(freshMeat);
+        TotalEmployeeCost += freshMeat.CareCost + freshMeat.Wage;
     }
 }
