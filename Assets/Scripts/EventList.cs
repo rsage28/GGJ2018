@@ -11,6 +11,7 @@ public class EventList : MonoBehaviour {
 	}
 
 	void Start () {
+		events = new Dictionary<Event, int>();
 		addDamagedTowerEvent();
 		addCultistDamagedTowerEvent();
 	}

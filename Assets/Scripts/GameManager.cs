@@ -167,7 +167,7 @@ public class GameManager : MonoBehaviour {
         if (TimeTick == null) {
             TimeTick = new UnityEvent();
         }
-        eventList = new EventList();
+        eventList = gameObject.AddComponent<EventList>();
     }
 
     void Update() {
@@ -193,30 +193,63 @@ public class GameManager : MonoBehaviour {
         Event chosenEvent = null;
         int attempts = 0;
         int maxAttempts = 10;
-        while (chosenEvent == null && attempts < maxAttempts) {
+        while (chosenEvent == null && attempts <= maxAttempts) {
             KeyValuePair<Event, int> randomEvent = eventList.Events.ElementAt(UnityEngine.Random.Range(0, eventList.Events.Count));
             maxAttempts++;
-            if (UnityEngine.Random.Range(0, 100) <= randomEvent.Value && eventRequirementsMet(randomEvent.Key)) {
-                chosenEvent = randomEvent.Key;
-                if (chosenEvent.NeedsTown) {
-                    while (chosenEvent.AffectedTown == null) {
-                        Town randomTown = UnlockedTowns[UnityEngine.Random.Range(0, UnlockedTowns.Count)];
-                        if (randomTown.ContainedStation != null) {
-                            chosenEvent.AffectedTown = randomTown;
-                        }
+            if (UnityEngine.Random.Range(0, 100) <= randomEvent.Value && globalEventRequirementsMet(randomEvent.Key)) {
+                if (randomEvent.Key.NeedsTown) {
+                    Town affectedTown = getRandomTownForEvent(randomEvent.Key);
+                    if (affectedTown != null) {
+                        chosenEvent = randomEvent.Key;
+                        chosenEvent.AffectedTown = affectedTown;
                     }
                 }
             }
         }
     }
 
-    private bool eventRequirementsMet(Event eventToCheck) {
+    private bool globalEventRequirementsMet(Event eventToCheck) {
         bool requirementsMet = true;
-        if (cultistCount > eventToCheck.GlobalCultistMaxRequirement) {
-            requirementsMet = false;
-        }
+        //requirementsMet =  >= eventToCheck.towerMinRequirement;
+        requirementsMet = moneyCount >= eventToCheck.MoneyMinRequirement;
+
+        requirementsMet = suspicionLevel >= eventToCheck.SuspicionMinRequirement;
+        requirementsMet = listenerCount >= eventToCheck.GlobalListenerMinRequirement;
+        requirementsMet = cultistCount >= eventToCheck.GlobalCultistMinRequirement;
+        requirementsMet = suspicionLevel <= eventToCheck.SuspicionMaxRequirement;
+        requirementsMet = listenerCount <= eventToCheck.GlobalListenerMaxRequirement;
+        requirementsMet = cultistCount <= eventToCheck.GlobalCultistMaxRequirement;
+
         return requirementsMet;
     }
+
+    private Town getRandomTownForEvent(Event eventToCheck) {
+        Town randomTown = null;
+        int townAttempts = 0;
+        int maxTownAttempts = UnlockedTowns.Count;
+
+        while (eventToCheck.AffectedTown == null && townAttempts <= maxTownAttempts) {
+            townAttempts++;
+            randomTown = UnlockedTowns[UnityEngine.Random.Range(0, UnlockedTowns.Count)];
+            if (randomTown.ContainedStation != null && localEventRequirementsMetByTown(eventToCheck, randomTown)) {
+                return randomTown;
+            }
+        }
+        return randomTown;
+    }
+
+    private bool localEventRequirementsMetByTown(Event eventToCheck, Town town) {
+        bool requirementsMet = true;
+
+        requirementsMet = town.Listeners >= eventToCheck.LocalListenerMinRequirement;
+        requirementsMet = town.Cultists >= eventToCheck.LocalCultistMinRequirement;
+        requirementsMet = town.Listeners <= eventToCheck.LocalListenerMaxRequirement;
+        requirementsMet = town.Cultists <= eventToCheck.LocalCultistMaxRequirement;
+
+        return requirementsMet;
+    }
+
+
     
     void UpdateText() {
         listenerCountText.text = "Listeners: " + ListenerCount;
