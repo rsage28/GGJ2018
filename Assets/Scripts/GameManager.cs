@@ -322,10 +322,10 @@ public class GameManager : MonoBehaviour {
         SelectedStation = station;
         stationManager.enabled = station != null && SelectedTown != null;
         if (stationManager.enabled) {
-            musicTypes.value = (int) SelectedStation.Music;
-            adTypes.value = (int) SelectedStation.Ad;
-            cultTypes.value = (int) SelectedStation.Cult;
-            marketingTypes.value = (int) SelectedStation.MarketingPlan;
+            musicTypes.value = (int) SelectedStation.ChosenMusicType;
+            adTypes.value = (int) SelectedStation.ChosenAdType;
+            cultTypes.value = (int) SelectedStation.ChosenCultMessageType;
+            marketingTypes.value = (int) SelectedStation.ChosenMarketingPlanType;
             musicEffectivePercentText.text = "Music Effectiveness: " + SelectedStation.MusicEffectivePercent.ToString() + "%";
             propEffectivePercentText.text = "Propaganda Effectiveness: " + SelectedStation.PropagandaEffectivePercent.ToString() + "%";
             employeeCountText.text = "Employee Count: " + SelectedStation.Employees.Count.ToString();
@@ -382,19 +382,19 @@ public class GameManager : MonoBehaviour {
     }
 
     public void MusicDropdownIndexChange(int index) {
-        SelectedStation.Music = (MusicType) index;
+        SelectedStation.ChosenMusicType = (MusicType) index;
     }
 
     public void AdDropdownIndexChange(int index) {
-        SelectedStation.Ad = (AdType) index;
+        SelectedStation.ChosenAdType = (AdType) index;
     }
 
     public void CultDropdownIndexChange(int index) {
-        SelectedStation.Cult = (CultMessageType) index;
+        SelectedStation.ChosenCultMessageType = (CultMessageType) index;
     }
 
     public void MarketingDropdownIndexChange(int index) {
-        SelectedStation.MarketingPlan = (MarketingPlanType) index;
+        SelectedStation.ChosenMarketingPlanType = (MarketingPlanType) index;
     }
 
     public void MusicTimeChange(float value) {

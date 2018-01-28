@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Station : MonoBehaviour {
     private Town containingTown;
-    private float totalEmployeeCost;
-    private float totalIncomePerTimeTick;
 
     [SerializeField]
     private float musicEffectivePercent;
@@ -23,18 +21,18 @@ public class Station : MonoBehaviour {
     private float stationUpkeep;
     [SerializeField]
     private List<Employee> employees;
-    [SerializeField, Range(0, 100)]
+    [SerializeField]
     private float moneyVsHappiness;
     [SerializeField]
     private MarketingPlanType marketingPlan;
     [SerializeField]
-    private UpgradeType upgrade;
+    private UpgradeType chosenUpgradeType;
     [SerializeField]
-    private MusicType music;
+    private MusicType chosenMusicType;
     [SerializeField]
-    private AdType ad;
+    private AdType chosenAdType;
     [SerializeField]
-    private CultMessageType cult;
+    private CultMessageType chosenCultMessageType;
 
     public Town ContainingTown {
         get { return containingTown; }
@@ -63,25 +61,25 @@ public class Station : MonoBehaviour {
 
     public float MoneyVsHappiness {
         get { return moneyVsHappiness; }
-        set { moneyVsHappiness = value; }
+        set { moneyVsHappiness = Mathf.Clamp(value, 0, 1); }
     }
 
-    public MusicType Music {
-        get { return music; }
-        set { music = value; }
+    public MusicType ChosenMusicType {
+        get { return chosenMusicType; }
+        set { chosenMusicType = value; }
     }
 
-    public AdType Ad {
-        get { return ad; }
-        set { ad = value; }
+    public AdType ChosenAdType {
+        get { return chosenAdType; }
+        set { chosenAdType = value; }
     }
 
-    public CultMessageType Cult {
-        get { return cult; }
-        set { cult = value; }
+    public CultMessageType ChosenCultMessageType {
+        get { return chosenCultMessageType; }
+        set { chosenCultMessageType = value; }
     }
 
-    public MarketingPlanType MarketingPlan {
+    public MarketingPlanType ChosenMarketingPlanType {
         get { return marketingPlan; }
         set { marketingPlan = value; }
     }
@@ -101,37 +99,65 @@ public class Station : MonoBehaviour {
         set { cultTimePercent = value; }
     }
 
-    public float TotalEmployeeCost {
-        get { return totalEmployeeCost; }
-        set { totalEmployeeCost = value; }
-    }
-
-    public float TotalIncomePerTimeTick {
-        get { return totalIncomePerTimeTick; }
-        set { totalIncomePerTimeTick = value; }
-    }
-
     public float StationUpkeep {
         get { return stationUpkeep; }
         set { stationUpkeep = value; }
     }
 
-    // Use this for initialization
     void Start() {
         GameManager.TimeTick.AddListener(OnTimeTick);
     }
 
-    // Update is called once per frame
-    void Update() {
-
+    void OnTimeTick() {
+        handleEmployees();
+        addMoney();
+        addListeners();
+        addCultists();
     }
 
-    void OnTimeTick() {
-        print("some shit here");
+    private void handleEmployees() {
+        List<Employee> employeesToRemove = new List<Employee>();
+        foreach (Employee employee in Employees) {
+            if (MoneyVsHappiness > 0.5f) {
+                employee.Happiness += MoneyVsHappiness * 5;
+            } else if (MoneyVsHappiness < 0.5f) {
+                employee.Happiness -= (1 - MoneyVsHappiness) * 5;
+            }
+
+            if (employee.Happiness < 0) {
+                employeesToRemove.Add(employee);
+            }
+        }
+        foreach (Employee employeeToRemove in employeesToRemove) {
+            Employees.Remove(employeeToRemove);
+        }
+    }
+
+    private void addMoney() {
+        float moneyToAdd = AdTimePercent * AdvertisingRevenuePercent * ContainingTown.Listeners*500;
+        if (ContainingTown.PreferredAdType == ChosenAdType) moneyToAdd *= 1.5f;
+        float moneyToSubtract = StationUpkeep;
+        foreach (Employee employee in Employees) {
+            moneyToSubtract += employee.Wage * MoneyVsHappiness;
+            moneyToSubtract += employee.CareCost * MoneyVsHappiness;
+        }
+        GameManager.Instance.MoneyCount += Mathf.Ceil(moneyToAdd);
+        GameManager.Instance.MoneyCount -= Mathf.Ceil(moneyToSubtract);
+    }
+
+    private void addListeners() {
+        float listenersToAdd = MusicTimePercent * MusicEffectivePercent * 2;
+        if (ContainingTown.PreferredMusicType == ChosenMusicType) listenersToAdd *= 1.5f;
+        ContainingTown.Listeners += (int) Mathf.Ceil(listenersToAdd);
+    }
+
+    private void addCultists() {
+        float cultistsToAdd = CultTimePercent * PropagandaEffectivePercent * 2;
+        if (ContainingTown.PreferredCultMessageType == ChosenCultMessageType) cultistsToAdd *= 1.5f;
+        ContainingTown.Cultists += (int) Mathf.Ceil(cultistsToAdd);
     }
 
     public void AddEmployee(Employee freshMeat) {
         Employees.Add(freshMeat);
-        TotalEmployeeCost += freshMeat.CareCost + freshMeat.Wage;
     }
 }
