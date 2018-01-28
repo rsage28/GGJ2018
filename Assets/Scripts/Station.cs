@@ -12,6 +12,12 @@ public class Station : MonoBehaviour {
     [SerializeField]
     private float advertisingRevenuePercent;
     [SerializeField]
+    private float musicTimePercent;
+    [SerializeField]
+    private float adTimePercent;
+    [SerializeField]
+    private float cultTimePercent;
+    [SerializeField]
     private List<Employee> employees;
     [SerializeField]
     private float moneyVsHappiness;
@@ -19,6 +25,12 @@ public class Station : MonoBehaviour {
     private MarketingPlanType marketingPlan;
     [SerializeField]
     private UpgradeType upgrade;
+    [SerializeField]
+    private MusicType music;
+    [SerializeField]
+    private AdType ad;
+    [SerializeField]
+    private CultMessageType cult;
 
     public Town ContainingTown {
         get { return containingTown; }
@@ -48,6 +60,41 @@ public class Station : MonoBehaviour {
     public float MoneyVsHappiness {
         get { return moneyVsHappiness; }
         set { moneyVsHappiness = value; }
+    }
+
+    public MusicType Music {
+        get { return music; }
+        set { music = value; }
+    }
+
+    public AdType Ad {
+        get { return ad; }
+        set { ad = value; }
+    }
+
+    public CultMessageType Cult {
+        get { return cult; }
+        set { cult = value; }
+    }
+
+    public MarketingPlanType MarketingPlan {
+        get { return marketingPlan; }
+        set { marketingPlan = value; }
+    }
+
+    public float MusicTimePercent {
+        get { return musicTimePercent; }
+        set { musicTimePercent = value; }
+    }
+
+    public float AdTimePercent {
+        get { return adTimePercent; }
+        set { adTimePercent = value; }
+    }
+
+    public float CultTimePercent {
+        get { return cultTimePercent; }
+        set { cultTimePercent = value; }
     }
 
     // Use this for initialization

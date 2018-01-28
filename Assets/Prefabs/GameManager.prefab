@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4578309388113666}
   - component: {fileID: 114551822053629720}
+  - component: {fileID: 114420758804837836}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -40,6 +41,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114420758804837836
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1644204228451070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c91941d31c17744cbf3529083a1f6bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114551822053629720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,10 +63,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4208bc654a36b84e8e16ff8650ccdb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameCamera: {fileID: 0}
+  selectedTown: {fileID: 0}
+  selectedStation: {fileID: 0}
+  listenerCount: 0
+  cultistCount: 0
+  moneyCount: 20000
+  eventChance: 15
+  suspicionLevel: 0
   timeStep: 60
   listenerCountText: {fileID: 0}
   moneyCountText: {fileID: 0}
   cultistCountText: {fileID: 0}
   suspicionLevelText: {fileID: 0}
+  populationCountText: {fileID: 0}
+  listenerCountTextTown: {fileID: 0}
+  cultistCountTextTown: {fileID: 0}
+  convertabilityLevelText: {fileID: 0}
+  preferredMusicTypeText: {fileID: 0}
+  preferredAdTypeText: {fileID: 0}
+  preferredCultTypeText: {fileID: 0}
+  stationCostText: {fileID: 0}
+  musicTypes: {fileID: 0}
+  adTypes: {fileID: 0}
+  cultTypes: {fileID: 0}
+  marketingTypes: {fileID: 0}
   HUD: {fileID: 0}
   stationManager: {fileID: 0}
+  townInfo: {fileID: 0}
+  stationClone: {fileID: 0}

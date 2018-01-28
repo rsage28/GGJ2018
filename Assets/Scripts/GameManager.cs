@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
 public class GameManager : MonoBehaviour {
     public static UnityEvent TimeTick;
@@ -14,6 +15,8 @@ public class GameManager : MonoBehaviour {
     private GameCamera gameCamera;
     [SerializeField]
     private Town selectedTown;
+    [SerializeField]
+    private Station selectedStation;
 
     private List<Town> towns;
 
@@ -48,6 +51,18 @@ public class GameManager : MonoBehaviour {
     public Text preferredAdTypeText;
     public Text preferredCultTypeText;
     public Text stationCostText;
+
+    // Station text
+    public Text musicEffectivePercentText;
+    public Text propEffectivePercentText;
+    public Text employeeCountText;
+    public Text cultistStationCountText;
+
+    // Station Dropdowns
+    public Dropdown musicTypes;
+    public Dropdown adTypes;
+    public Dropdown cultTypes;
+    public Dropdown marketingTypes;
 
     public Canvas HUD;
     public Canvas stationManager;
@@ -109,10 +124,19 @@ public class GameManager : MonoBehaviour {
         set { timeStep = value; }
     }
 
+    public Station SelectedStation {
+        get { return selectedStation; }
+        set { selectedStation = value; }
+    }
+
     void Start() {
         nextTimeStep = Time.time + TimeStep;
         Towns = FindObjectsOfType<Town>().ToList();
         UpdateText();
+        PopulateMusicDropdown();
+        PopulateAdDropdown();
+        PopulateCultDropdown();
+        PopulateMarketingDropdown();
     }
 
     void Awake() {
@@ -131,7 +155,7 @@ public class GameManager : MonoBehaviour {
         if (Time.time >= nextTimeStep) {
             nextTimeStep = Time.time + TimeStep;
             TimeTick.Invoke();
-            if (Random.Range(0, 100) <= EventChance) {
+            if (UnityEngine.Random.Range(0, 100) <= EventChance) {
                 RandomEvent();
             }
             UpdateText();
@@ -165,13 +189,20 @@ public class GameManager : MonoBehaviour {
             preferredAdTypeText.text = "Prefered Ad Type: " + SelectedTown.PreferredAdType.ToString();
             preferredCultTypeText.text = "Preferred Cult Type: " + SelectedTown.PreferredCultMessageType.ToString();
             stationCostText.text = "Station Cost: ";
-            SelectRadioStation(SelectedTown.ContainedStation);
-        }        
+        }
     }
 
-    private void SelectRadioStation(Station station) {
-        stationManager.enabled = station != null;
+    public void SelectRadioStation(Station station) {
+        SelectedStation = station;
+        stationManager.enabled = station != null && SelectedTown != null;
         if (stationManager.enabled) {
+            musicTypes.value = (int) SelectedStation.Music;
+            adTypes.value = (int) SelectedStation.Ad;
+            cultTypes.value = (int) SelectedStation.Cult;
+            marketingTypes.value = (int) SelectedStation.MarketingPlan;
+            musicEffectivePercentText.text = SelectedStation.MusicEffectivePercent.ToString();
+            propEffectivePercentText.text = SelectedStation.PropagandaEffectivePercent.ToString();
+            employeeCountText.text = SelectedStation.Employees.Count.ToString();
 
         }
     }
@@ -180,5 +211,50 @@ public class GameManager : MonoBehaviour {
         Station newStation = Instantiate(stationClone, SelectedTown.transform);
         SelectedTown.ContainedStation = newStation;
         newStation.ContainingTown = SelectedTown;
+        SelectRadioStation(newStation);
+    }
+
+    void PopulateMusicDropdown() {
+        string[] musicNames = Enum.GetNames(typeof(MusicType));
+        List<string> enumerableNames = new List<string>(musicNames);
+
+        musicTypes.AddOptions(enumerableNames);
+    }
+
+    void PopulateAdDropdown() {
+        string[] adNames = Enum.GetNames(typeof(AdType));
+        List<string> enumerableNames = new List<string>(adNames);
+
+        adTypes.AddOptions(enumerableNames);
+    }
+
+    void PopulateCultDropdown() {
+        string[] cultNames = Enum.GetNames(typeof(CultMessageType));
+        List<string> enumerableNames = new List<string>(cultNames);
+
+        cultTypes.AddOptions(enumerableNames);
+    }
+
+    void PopulateMarketingDropdown() {
+        string[] marketingNames = Enum.GetNames(typeof(MarketingPlanType));
+        List<string> enumerableNames = new List<string>(marketingNames);
+
+        marketingTypes.AddOptions(enumerableNames);
+    }
+
+    public void MusicDropdownIndexChange(int index) {
+        SelectedStation.Music = (MusicType) index;
+    }
+
+    public void AdDropdownIndexChange(int index) {
+        SelectedStation.Ad = (AdType) index;
+    }
+
+    public void CultDropdownIndexChange(int index) {
+        SelectedStation.Cult = (CultMessageType) index;
+    }
+
+    public void MarketingDropdownIndexChange(int index) {
+        SelectedStation.MarketingPlan = (MarketingPlanType) index;
     }
 }

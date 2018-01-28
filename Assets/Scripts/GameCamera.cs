@@ -161,12 +161,14 @@ public class GameCamera : MonoBehaviour {
             nearestTown = GameManager.Instance.getNearestTown(mousePos);
             if (Vector3.Distance(mousePos, nearestTown.transform.position) < nearestTown.Radius) {
                 GameManager.Instance.SelectTown(GameManager.Instance.SelectedTown == nearestTown ? null : nearestTown);
+                GameManager.Instance.SelectRadioStation(nearestTown.ContainedStation);
             }
         }
 
         if (MyCameraZoomType == CameraZoomType.Province && ZoomInSwitchCount > ZoomSwitchMax/2) {
             nearestTown = GameManager.Instance.getNearestTown(transform.position);
             GameManager.Instance.SelectTown(nearestTown);
+            GameManager.Instance.SelectRadioStation(nearestTown.ContainedStation);
             if (transform.position != nearestTown.transform.position) {
                 float speed = Vector3.Distance(transform.position, nearestTown.transform.position)/(10*ZoomSwitchMax/3);
                 Vector3 lerpPos = Vector3.Lerp(transform.position, nearestTown.transform.position, speed);
