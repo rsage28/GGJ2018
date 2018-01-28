@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour {
     public Canvas stationManager;
     public Canvas townInfo;
 
+    public Station stationClone;
+
     public static GameManager Instance {
         get { return instance; }
         private set {
@@ -153,16 +155,30 @@ public class GameManager : MonoBehaviour {
 
     public void SelectTown(Town town) {
         SelectedTown = town;
-        townInfo.enabled = town != null ? true : false;
+        townInfo.enabled = town != null;
         if (townInfo.enabled) {
-            populationCountText.text = "";
-            listenerCountTextTown.text = "";
-            cultistCountTextTown.text = "";
-            convertabilityLevelText.text = "";
-            preferredMusicTypeText.text = "";
-            preferredAdTypeText.text = "";
-            preferredCultTypeText.text = "";
-            stationCostText.text = "";
+            populationCountText.text = "Town Population: " + SelectedTown.Population;
+            listenerCountTextTown.text = "Listener Count: " + SelectedTown.Listeners;
+            cultistCountTextTown.text = "Cultist Count: " + SelectedTown.Cultists;
+            convertabilityLevelText.text = "Convertability Level: " + SelectedTown.Convertability + "%";
+            preferredMusicTypeText.text = "Preferred Music Type: " + SelectedTown.PreferredMusicType.ToString();
+            preferredAdTypeText.text = "Prefered Ad Type: " + SelectedTown.PreferredAdType.ToString();
+            preferredCultTypeText.text = "Preferred Cult Type: " + SelectedTown.PreferredCultMessageType.ToString();
+            stationCostText.text = "Station Cost: ";
+            SelectRadioStation(SelectedTown.ContainedStation);
+        }        
+    }
+
+    private void SelectRadioStation(Station station) {
+        stationManager.enabled = station != null;
+        if (stationManager.enabled) {
+
         }
+    }
+
+    public void BuyStation() {
+        Station newStation = Instantiate(stationClone, SelectedTown.transform);
+        SelectedTown.ContainedStation = newStation;
+        newStation.ContainingTown = SelectedTown;
     }
 }

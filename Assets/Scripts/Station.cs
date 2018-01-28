@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class Station : MonoBehaviour {
     private Town containingTown;
+
+    [SerializeField]
     private float musicEffectivePercent;
+    [SerializeField]
     private float propagandaEffectivePercent;
+    [SerializeField]
     private float advertisingRevenuePercent;
+    [SerializeField]
     private List<Employee> employees;
+    [SerializeField]
     private float moneyVsHappiness;
+    [SerializeField]
     private MarketingPlanType marketingPlan;
+    [SerializeField]
     private UpgradeType upgrade;
 
     public Town ContainingTown {

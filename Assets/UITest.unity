@@ -782,54 +782,11 @@ Prefab:
     - target: {fileID: 224739266255855872, guid: 132f4ceb91ce6b6488fdbacd38de4a94,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 131.425
-      objectReference: {fileID: 0}
-    - target: {fileID: 224739266255855872, guid: 132f4ceb91ce6b6488fdbacd38de4a94,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -47
+      value: 115.65
       objectReference: {fileID: 0}
     - target: {fileID: 224325111132688428, guid: 132f4ceb91ce6b6488fdbacd38de4a94,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1074984158982118, guid: 132f4ceb91ce6b6488fdbacd38de4a94, type: 2}
-      propertyPath: m_Name
-      value: MoneyVsHappiness
-      objectReference: {fileID: 0}
-    - target: {fileID: 224554810643276202, guid: 132f4ceb91ce6b6488fdbacd38de4a94,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: -66.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224554810643276202, guid: 132f4ceb91ce6b6488fdbacd38de4a94,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 251.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 224028110078319856, guid: 132f4ceb91ce6b6488fdbacd38de4a94,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 177.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 224028110078319856, guid: 132f4ceb91ce6b6488fdbacd38de4a94,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 215.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 224410869554891094, guid: 132f4ceb91ce6b6488fdbacd38de4a94,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: -880
-      objectReference: {fileID: 0}
-    - target: {fileID: 224410869554891094, guid: 132f4ceb91ce6b6488fdbacd38de4a94,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1192637821437006, guid: 132f4ceb91ce6b6488fdbacd38de4a94, type: 2}
-      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
